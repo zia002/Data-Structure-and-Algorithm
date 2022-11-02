@@ -10,7 +10,7 @@ struct node
     int data;
     struct node*next;
 };
-struct node*head,*newnode,*temp,*tail;
+struct node*head,*newnode,*temp;
 //--------------------------------------------
 //Function--to--Print--circular--Linked--List:
 //--------------------------------------------
@@ -48,7 +48,6 @@ void create(int n)
             temp->next=newnode;
             temp=newnode;
         }
-        temp->next=head;
         i=i+1;
     }
 }
