@@ -38,9 +38,9 @@ void anypoint()
     len=lengthlist()+1;
     printf("Enter Position:");
     scanf("%d",&pos);
-    if(pos>(pos+1))
+    if(pos>(len+1))
     {
-    printf("Invalid Position");
+    printf("Invalid Position\n");
     }
     if(pos==1)
     {
