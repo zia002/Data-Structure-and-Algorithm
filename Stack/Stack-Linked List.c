@@ -5,7 +5,7 @@ void push();
 void pop();
 void display();
 void peek();
-//-------------------
+//--------------------
 //Node-----Type------
 struct node
 {
@@ -14,7 +14,7 @@ struct node
 };
 struct node*temp,*top=0,*newnode;
 //---------------------
-//Insert-----Data------
+//Insert-----Data---------
 void push()
 {
     newnode=(struct node*)malloc(sizeof(struct node));
