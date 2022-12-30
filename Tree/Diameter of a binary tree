@@ -1,0 +1,55 @@
+/*
+       1
+      /\
+     2  3
+    /   /
+   4   6
+*/
+#include <bits/stdc++.h>
+using namespace std;
+int maxx=0;
+struct node{
+    int data;
+    struct node*left;
+    struct node*right;
+    node(int value){ 
+    data=value;
+    left=0;
+    }
+};
+int height(struct node*root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    int lh=height(root->left);
+    int rh=height(root->left);
+    return max(lh,rh)+1;
+}
+int diameter(struct node*root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    int lh=height(root->left);
+    int rh=height(root->right);
+    maxx=max(maxx,lh+rh);
+    diameter(root->left);
+    diameter(root->right);
+    return maxx+1;
+}
+int main() 
+{
+    struct node*root=new node(1);
+    root->left=new node(2);
+    root->right=new node(3);
+    root->left->left=new node(4);
+    //root->left->right=new node(5);
+    root->right->left=new node(6);
+    //root->right->right=new node(7);
+    cout<<"Diameter of a binary tree:";
+    cout<<diameter(root);
+    return 0;
+}
