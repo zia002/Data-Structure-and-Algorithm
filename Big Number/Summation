@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pb push_back
+const int M = 1e9+7 ;
+ 
+int main() {
+    ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0) ;
+    int t,carry=0,sum,x,y;
+    string s1;cin>>s1;        //first number
+    string s2;cin>>s2;        // second number
+    int i=s1.size()-1,j=s2.size()-1;
+    if(i<=j) swap(s1,s2);//s1 alway equal  or big
+    vector<int>v;
+    while(i>=0 && j>=0){ //for equal part
+        x=s1[i]-'0';
+        y=s2[j]-'0';
+        sum=x+y+carry;
+        t=sum%10;
+        carry=sum/10;
+        v.pb(t);
+        --i;
+        --j;
+    } 
+    ++i;
+    while(i--){ //rem part
+        x=s1[i]-'0';
+        x+=carry;
+        v.pb(x);
+        carry=0;
+    }
+    if(carry!=0) v.pb(carry);
+    reverse(v.begin(),v.end());
+    for(auto it:v) cout<<it;
+    return 0;
+}
