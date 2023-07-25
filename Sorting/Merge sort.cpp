@@ -1,87 +1,36 @@
-//Merge Sort.................
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-//for merging two array......
-
-void merge(int arr[],int lb,int mid,int ub)
-{
-    int i=lb;
-    int j=mid+1;
-    int k=lb;
-    int b[ub+1];
-    while(i<=mid && j<=ub)
-    {
-        if(arr[i]<=arr[j])
-        {
-            b[k]=arr[i];
-            i=i+1;
-            k=k+1;
+#define pb push_back
+void mrg(vector<int> &v,int l,int mid,int r){
+    int left=l,right=mid+1;
+    vector<int>tmp;
+    while(left<=mid && right<=r){
+        if(v[left]<=v[right]){
+           tmp.pb(v[left]);
+           left++;
         }
-        else
-        {
-            b[k]=arr[j];
-            j=j+1;
-            k=k+1;
+        else if(v[left]>v[right]){
+            tmp.pb(v[right]);
+            right++;
         }
     }
-    if(i>mid)
-    {
-        while(j<=ub)
-        {
-            b[k]=arr[j];
-            j=j+1;
-            k=k+1;
-        }
-    }
-    else
-    {
-        while(i<=mid)
-        {
-            b[k]=arr[i];
-            i=i+1;
-            k=k+1;
-        }
-    }
-  for(k=lb;k<=ub;k++)
-    {
-    arr[k]=b[k];
-    }
+    while(left<=mid) tmp.pb(v[left]),++left;
+    while(right<=r) tmp.pb(v[right]),++right;
+    for(int k=l;k<=r;++k) v[k]=tmp[k-l];
 }
-
-/* 
-for dividing array into two array untill each
-array has only one value...
-*/
-
-void mergesort(int arr[],int lb,int ub)
-{
-   int mid;
-    if(lb<ub)
-    {
-    mid=(lb+ub)/2;
-    mergesort(arr,lb,mid);
-    mergesort(arr,mid+1,ub);
-    merge(arr,lb, mid,ub);
+void ms(vector<int> &v,int l,int r){
+    int mid=(l+r)/2;
+    if(l<r){
+        ms(v,l,mid);
+        ms(v,mid+1,r);
+        mrg(v,l,mid,r);
     }
+    else return;
 }
-int main()
-{
-    int i,n;
-    cout<<"Enter Array Size:";
-    cin>>n;
-    int arr[n];
-    int b[n];
-    cout<<"Enter array value:";
-    for(i=0; i<n; i++)
-    {
-        cin>>arr[i];
-    }
-    mergesort(arr,0,(n-1));
-    cout<<"Sorted Array In Ascending Order:";
-    for(i=0; i<n; i++)
-    {
-        cout<<arr[i]<<" ";
-    }
+int main() {
+    ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0) ;
+    vector<int>v={3,2,4,1,3,7,9,8,8,0};
+    ms(v,0,v.size()-1);
+    for(auto it:v) cout<<it<<" ";
     return 0;
 }
